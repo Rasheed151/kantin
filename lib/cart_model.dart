@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:cart/home.dart';
 
-class MyModel extends ChangeNotifier {
-  get datalist => _datalist;
+class MyTry extends StatelessWidget {
+  const MyTry({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Column(
+            children: <Widget>[
+             
+            ],
+          ),
+        ),
+    );
+  }
 }

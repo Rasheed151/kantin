@@ -104,24 +104,47 @@ class _MyHomeState extends State<MyHome> {
       ),
       onPressed: () => null
     ),
-    SizedBox(width: 10),
+    SizedBox(width: 5),
     ElevatedButton(
-      child: Text(
-        "Buy now".toUpperCase(),
+        child: Text(
+        "Information".toUpperCase(),
         style: TextStyle(fontSize: 14)
       ),
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 0, 0, 0)),
-        backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 235, 39, 39)),
+        foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 255, 255, 255)),
+        backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 33, 175, 45)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
-            side: BorderSide(color: Color.fromARGB(255, 218, 49, 49))
+            side: BorderSide(color: Colors.yellow)
           )
         )
       ),
-      onPressed: () => null
-    )
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+                color: const Color.fromARGB(255, 251, 251, 251),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                       Text('${dataList[index]['info']}'),
+                      ElevatedButton(
+                        child: const Text('Close'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
   ]
 )
                               ],
