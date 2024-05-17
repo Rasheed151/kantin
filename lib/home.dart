@@ -107,7 +107,7 @@ class _MyHomeState extends State<MyHome> {
                           ),
                       onPressed: () {
                   setState(() {
-                    bool itemAlreadyInCart = cartItems.any((item) =>dataList[index]['idBaang'] == dataList[index]['idBarang']);
+                    bool itemAlreadyInCart = cartItems.any((item) =>dataList[index]['idBarang'] == dataList[index]['idBarang']);
                     
                   if (!itemAlreadyInCart) {
      

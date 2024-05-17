@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:cart/home.dart';
+import 'package:cart/admin.dart';
 
 
 void main() => runApp(MaterialApp(
@@ -42,7 +43,17 @@ class _LoginPage extends State<LoginPage> {
       Navigator.push(context,
        MaterialPageRoute(builder: (context) => MyHome()
        ));
-    } else {
+    } else if(data.toString() == "Atmin"){
+        print("Atmin Udah dateng!\n");
+      setState(() {
+        email.clear();
+        password.clear();
+      });
+
+      Navigator.push(context,
+       MaterialPageRoute(builder: (context) => MyAdmin()
+       ));
+    }else {
       print("Data tidak ada...\n"+data.toString());
 
       setState(() {
