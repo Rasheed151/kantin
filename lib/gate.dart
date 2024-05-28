@@ -1,7 +1,6 @@
 import 'package:cart/login.dart';
 import 'package:cart/register.dart';
 import 'package:flutter/material.dart';
-import 'package:cart/home.dart';
 
 class MyGate extends StatefulWidget {
   const MyGate({Key? key}) : super(key: key);

@@ -1,59 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cart/provider.dart';
 
-class MyCart extends StatefulWidget {
-  final List<dynamic> cartItems;
-
-  const MyCart({Key? key, required this.cartItems}) : super(key: key);
-
-  @override
-  State<MyCart> createState() => _MyCartState();
-}
-
-class _MyCartState extends State<MyCart> {
+class MyCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Keranjang Belanja'),
+        backgroundColor: Colors.green,
+      ),
       backgroundColor: Colors.white,
-      
-      body: 
-      ListView.builder(
-        itemCount: widget.cartItems.length,
-        itemBuilder: (context, index) {
-          dynamic item = widget.cartItems[index];
-         
-          return ListTile(
-            leading: Image.asset('lib/images/open.png'),
-            title: Text(item['nama']),
-            subtitle: Text('Harga: ${item['Harga']}'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
+      body: Consumer<CartProvider>(
+        builder: (context, cartProvider, child) {
+          return ListView.builder(
+            itemCount: cartProvider.cartItems.length,
+            itemBuilder: (context, index) {
+              var item = cartProvider.cartItems[index];
+              return ListTile(
+                leading: Image.asset('lib/images/open.png'),
+                title: Text(item['nama']),
+                subtitle: Text('Harga: ${item['Harga']}'),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      onPressed: () {
+                        cartProvider.decreaseQuantity(item);
+                      },
+                    ),
+                    Text(item['quantity'].toString()),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        cartProvider.increaseQuantity(item);
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        cartProvider.removeFromCart(item);
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      ),
+      bottomNavigationBar: Consumer<CartProvider>(
+        builder: (context, cartProvider, child) {
+          return Container(
+            padding: EdgeInsets.all(16.0),
+            color: Colors.green,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: () {
-                    setState(() {
-                      if (item['quantity'] > 1) {
-                        item['quantity']--;
-                      }
-                    });
-                  },
+                Text(
+                  'Total: \$${cartProvider.totalPrice.toStringAsFixed(2)}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                Text(item['quantity'].toString()),
-                IconButton(
-                  icon: Icon(Icons.add),
+                ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      item['quantity']++;
-                    });
+                    // Handle checkout action
                   },
-                ),
-                IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    setState(() {
-                      widget.cartItems.removeAt(index);
-                    });
-                  },
+                  child: Text('Checkout'),
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
                 ),
               ],
             ),
