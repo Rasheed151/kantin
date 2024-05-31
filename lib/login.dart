@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:cart/home.dart';
-import 'package:cart/admin.dart';
+import 'package:cart/stock.dart';
+import 'admin.dart';
 
 
 void main() => runApp(MaterialApp(

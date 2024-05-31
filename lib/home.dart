@@ -83,8 +83,8 @@ class _MyHomeState extends State<MyHome> {
                         return Card(
                           elevation: 4,
                           child: ListTile(
-                            leading: Image.asset(items[index],
-                                width: 200, height: 200),
+                            // leading: Image.asset(items[index],
+                            //     width: 200, height: 200),
                             title: Text('${dataList[index]['nama']}'),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
